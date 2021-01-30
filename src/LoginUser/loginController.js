@@ -23,7 +23,8 @@ exports.loginUser = (req, res) => {
             let allUsers = snapshot.val();
             for (let uid in allUsers) {
                 let dbEmail = _.get(allUsers[uid], ['publicInfo', 'email'], undefined);
-                if (email === dbEmail) {
+                let dbPassword = _.get(allUsers[uid], ['publicInfo', 'password'], undefined);
+                if ((email === dbEmail) && (password === dbPassword)) {
                     database.ref(`/food-delivery-app/users/${uid}/publicInfo`).update({ token: token }).then(() => {
                         res.json({
                             message: "success. User is logged in. Token added into db",
@@ -32,8 +33,13 @@ exports.loginUser = (req, res) => {
 
                         return false;
                     })
+                } else {
+                    // TODO need to validate if wrong id and password provided
+                    console.log("not matched with id/password.");
                 }
             }
+        }).catch(err => {
+            res.json(err);
         })
         
     }

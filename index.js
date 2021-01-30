@@ -52,7 +52,6 @@ const getMenusRoute = require('./src/GetMenus/menusRoutes');
 getMenusRoute(app);
 
 
-
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
