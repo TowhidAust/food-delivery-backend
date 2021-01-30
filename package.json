@@ -1,25 +1,29 @@
 {
-  "name": "food-delivery-backend",
+  "name": "myexpressserver",
   "version": "1.0.0",
-  "description": "food delivery",
-  "main": "server.js",
-  "dependencies": {
-    "express": "^4.17.1",
-    "nodemon": "^2.0.7"
-  },
-  "devDependencies": {},
+  "description": "expressserver",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TowhidAust/food-delivery-backend.git"
+    "url": "git+https://github.com/TowhidAust/myExpressServer.git"
   },
-  "author": "TOWHID",
-  "license": "MIT",
+  "author": "Towhid",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TowhidAust/food-delivery-backend/issues"
+    "url": "https://github.com/TowhidAust/myExpressServer/issues"
   },
-  "homepage": "https://github.com/TowhidAust/food-delivery-backend#readme"
+  "homepage": "https://github.com/TowhidAust/myExpressServer#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "firebase": "^8.0.2",
+    "loadash": "^1.0.0",
+    "lodash": "^4.17.20",
+    "nodemon": "^2.0.6"
+  }
 }
