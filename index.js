@@ -4,6 +4,7 @@ const app = express();
 const port = 5000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
+
 // Load the full build of loadash.
 
 // allow the origins here.
@@ -34,15 +35,21 @@ app.use(cors({
 var jsonParser = bodyParser.json();
 app.use(jsonParser);
 
-// 1. Create user
-const createUserRoute = require('./src/CreateUser/createUserRoutes.js');
+// CREATE USER
+const createUserRoute = require('./src/CreateUser/createUserRoutes');
 createUserRoute(app);
 
-// 2. Edit user
-const editUserRoute = require('./src/EditUser/editUserRoutes.js');
+// EDIT USERS DATA
+const editUserRoute = require('./src/EditUser/editUserRoutes');
 editUserRoute(app);
 
+// LOGIN USER
+const loginUserRoute = require('./src/LoginUser/loginRoutes');
+loginUserRoute(app);
 
+// GET MENU ITEMS
+const getMenusRoute = require('./src/GetMenus/menusRoutes');
+getMenusRoute(app);
 
 
 

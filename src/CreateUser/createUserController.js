@@ -1,8 +1,15 @@
 
 const { database } = require('../../firebase');
 const _ = require('lodash');
+const { body, validationResult } = require('express-validator');
 
 
+
+/**
+ * CREATE USER
+ * REQ DATA SHOULD LOOK LIKE BELOW
+ * {"name":"towhid", "email":"t@gmail.com", "address": "Dhanmondi", "password":"12345"}
+ */
 exports.createUser = (req, res) => {
 
     let userInfo = {publicInfo: req.body};
