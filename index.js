@@ -5,7 +5,6 @@ const port = 5000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 // Load the full build of loadash.
-const _ = require('lodash');
 
 // allow the origins here.
 let allowedOrigins = [
@@ -35,57 +34,17 @@ app.use(cors({
 var jsonParser = bodyParser.json();
 app.use(jsonParser);
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+// 1. Create user
+const createUserRoute = require('./src/CreateUser/createUserRoutes.js');
+createUserRoute(app);
+
+// 2. Edit user
+const editUserRoute = require('./src/EditUser/editUserRoutes.js');
+editUserRoute(app);
 
 
-/**
- * CREATE USER
- * accepts a body json object
- * name email address looks like below
- * {"name":"towhid", "email":"test@gmail.com", "address": "dhanmondi"}
- */
-app.post('/create-user', function(req, res){
-    let userInfo = {publicInfo: req.body};
-    // first check if this given email already exists or not
-    let givenEmail = req.body.email;
-    let isUserExists = false;
 
-    database.ref('/food-delivery-app/users').once("value").then((snapshot)=>{
-        let allUsers = snapshot.val();
-        if(allUsers){
-            for(let uid in allUsers){
-                let email = _.get(allUsers[uid], ['publicInfo', 'email'], undefined);
-                if( email === givenEmail){
-                    isUserExists = true
-                    res.send({"failed": "User Already Exists"});
-                    return false;
-                }  
-            }
 
-            if(isUserExists == false){
-                database.ref('/food-delivery-app/users').push(userInfo).then(snapshot=>{
-                    res.send({"success":"User Created"});
-                }).catch(err=>{
-                    res.send({"err": err.code})
-                });
-                return false;
-            }
-
-        }else{
-            database.ref('/food-delivery-app/users').push(userInfo).then(snapshot=>{
-                res.send({"success":"User Created"});
-            }).catch(err=>{
-                
-                console.log(err.code);
-                res.send({"err": `${err.code}`})
-            }
-            );
-        }
-    }).catch(err=> console.log(err));
-   
-});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
